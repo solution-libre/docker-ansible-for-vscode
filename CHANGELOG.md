@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-configure-file { "MD024": { "allow_different_nesting": true } } -->
 
-## [0.1.0] 2024-12-20
+## [0.1.0] - 2024-12-20
 
 ### Added
 
