@@ -1,0 +1,89 @@
+# Copyright (C) 2024 Solution Libre
+# 
+# This file is part of Ansible Docker Image for VSCode.
+# 
+# Ansible Docker Image for VSCode is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# Ansible Docker Image for VSCode is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with Ansible Docker Image for VSCode.  If not, see <https://www.gnu.org/licenses/>.
+
+include:
+  - component: $CI_SERVER_FQDN/gitlab/components/lint/markdown@0.5.0
+    inputs:
+      stage: linting
+  - component: usine.solution-libre.fr/gitlab/components/changelog/parse@0.1.2
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
+
+stages:
+  - linting
+  - build
+  - test
+  - release
+
+hadolint:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/hadolint:latest
+  script:
+    - hadolint Dockerfile
+
+docker build:
+  stage: build
+  variables:
+    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - |
+      docker build \
+        --pull \
+        --label org.opencontainers.image.created=$(date -Iseconds) \
+        --label org.opencontainers.image.revision=${CI_COMMIT_REF_SLUG} \
+        -t "$DOCKER_IMAGE_NAME" .
+    - docker push "$DOCKER_IMAGE_NAME"
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+        docker push "$CI_REGISTRY_IMAGE:latest"
+      fi
+    - |
+      if [[ -n "$CI_COMMIT_TAG" ]]; then
+        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+        docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+      fi
+
+docker test:
+  stage: test
+  needs:
+    - docker build
+  variables:
+    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker run --rm ${DOCKER_IMAGE_NAME} --version
+
+container_scanning:
+  variables:
+    CS_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  cache: []
+  needs:
+    - parse changelog
+    - docker test
+  rules:
+    - if: $CI_COMMIT_TAG
+  script: echo "Creating release ${CI_COMMIT_TAG}"
+  release:
+    tag_name: ${CI_COMMIT_TAG}
+    description: release-note.md
