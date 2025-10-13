@@ -34,6 +34,10 @@ LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.f
       org.opencontainers.image.vendor='Solution Libre' \
       org.opencontainers.image.version="${VERSION}"
 
+# hadolint ignore=DL3041
+RUN dnf install -y openssl \
+    && dnf clean all
+
 RUN useradd -m vscode
 USER vscode
 # hadolint ignore=SC2016
