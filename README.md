@@ -38,7 +38,7 @@ via [Development Containers](https://containers.dev/) by [Solution Libre].
 
 | Software                    | Version  |
 | --------------------------- | -------- |
-| [Ansible Development Tools] | v24.12.0 |
+| [Ansible Development Tools] | v25.8.3 |
 
 ## Development
 

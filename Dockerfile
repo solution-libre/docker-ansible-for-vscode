@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Ansible Docker Image for VSCode.  If not, see <https://www.gnu.org/licenses/>.
 
-ARG ADT_VERSION=v24.12.0
+ARG ADT_VERSION=v25.8.3
 
 FROM ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}
 
@@ -40,5 +40,5 @@ USER vscode
 RUN curl -q https://salsa.debian.org/debian/bash/-/raw/debian/master/debian/skel.bashrc -o ~/.bashrc \
     && sed -i \
         -e 's/\(PS1=.*\)\\\$ /\1$(__git_ps1 " (%s)")\\\$ /' \
-        -e '59i . /usr/share/git-core/git-prompt.sh' \
+        -e '59i . /usr/share/git-core/contrib/completion/git-prompt.sh' \
         ~/.bashrc
