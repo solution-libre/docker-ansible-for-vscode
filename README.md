@@ -21,7 +21,7 @@ via [Development Containers](https://containers.dev/) by [Solution Libre].
     ```json
     {
       "name": "Ansible",
-      "image": "registry.solution-libre.fr/docker/ansible-for-vscode:0.1.0",
+      "image": "registry.solution-libre.fr/docker/ansible-for-vscode:0.2.0",
       "customizations": {
         "vscode": {
           "extensions": [
@@ -36,9 +36,9 @@ via [Development Containers](https://containers.dev/) by [Solution Libre].
 
 ## Reference
 
-| Software                    | Version  |
-| --------------------------- | -------- |
-| [Ansible Development Tools] | v25.8.3 |
+| Software                    | Version |
+| --------------------------- | ------- |
+| [Ansible Development Tools] | v26.4.6 |
 
 ## Development
 

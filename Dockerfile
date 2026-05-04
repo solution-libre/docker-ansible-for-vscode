@@ -1,4 +1,4 @@
-# Copyright (C) 2025 Solution Libre
+# Copyright (C) 2025-2026 Solution Libre
 # 
 # This file is part of Ansible Docker Image for VSCode.
 # 
@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Ansible Docker Image for VSCode.  If not, see <https://www.gnu.org/licenses/>.
 
-ARG ADT_VERSION=v25.8.3
+ARG ADT_VERSION=v26.4.6
 
 FROM ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}
 
 ARG ADT_VERSION
-ARG VERSION=0.1.0
+ARG VERSION=0.2.0
 
 LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.fr>' \
       org.opencontainers.image.base.name="ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}" \
@@ -35,7 +35,7 @@ LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.f
       org.opencontainers.image.version="${VERSION}"
 
 # hadolint ignore=DL3041
-RUN dnf install -y openssl \
+RUN dnf install -y bash-completion openssl \
     && dnf clean all
 
 RUN useradd -m vscode
