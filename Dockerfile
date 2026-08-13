@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Ansible Docker Image for VSCode.  If not, see <https://www.gnu.org/licenses/>.
 
-ARG ADT_VERSION=v26.4.6
+ARG ADT_VERSION=v26.8.0
 
 FROM ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}
 
