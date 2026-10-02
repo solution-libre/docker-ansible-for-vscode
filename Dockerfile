@@ -1,17 +1,17 @@
 # Copyright (C) 2025-2026 Solution Libre
-# 
+#
 # This file is part of Ansible Docker Image for VSCode.
-# 
+#
 # Ansible Docker Image for VSCode is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # Ansible Docker Image for VSCode is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with Ansible Docker Image for VSCode.  If not, see <https://www.gnu.org/licenses/>.
 
@@ -20,7 +20,7 @@ ARG ADT_VERSION=v26.9.0
 FROM ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}
 
 ARG ADT_VERSION
-ARG VERSION=0.2.0
+ARG VERSION=0.2.1
 
 LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.fr>' \
       org.opencontainers.image.base.name="ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}" \
