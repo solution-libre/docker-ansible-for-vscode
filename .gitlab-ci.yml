@@ -37,6 +37,7 @@ hadolint:
 docker build:
   stage: build
   variables:
+    BUILDX_NO_DEFAULT_ATTESTATIONS: "1" # https://support.gitlab.com/hc/en-us/articles/29426166749596-Push-to-Container-Registry-Fails-Error-error-from-registry-blob-unknown-to-registry
     DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   before_script:
     - echo "${CI_REGISTRY_PASSWORD}" | docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} --password-stdin
