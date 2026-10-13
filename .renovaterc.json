@@ -2,5 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^README\\.md$/"],
+      "matchStrings": ["\\[Ansible Development Tools\\] +\\| *(?<currentValue>v\\d+\\.\\d+\\.\\d+) +\\|"],
+      "depNameTemplate": "ghcr.io/ansible/community-ansible-dev-tools",
+      "datasourceTemplate": "docker"
+    }
   ]
 }
