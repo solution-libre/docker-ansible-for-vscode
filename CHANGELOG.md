@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-configure-file { "MD024": { "siblings_only": true } } -->
 
+## [0.2.2] - 2026-10-13
+
+### Changed
+
+- Bump Ansible dev tools version from 26.9.0 to 26.10.0
+
+### Fixed
+
+- Set the UID of the user `vscode`
+
 ## [0.2.1] - 2026-10-02
 
 ### Changed
@@ -39,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Docker image creation
 
+[0.2.2]: https://usine.solution-libre.fr/docker/ansible-for-vscode/-/compare/0.2.1...0.2.2
 [0.2.1]: https://usine.solution-libre.fr/docker/ansible-for-vscode/-/compare/0.2.0...0.2.1
 [0.2.0]: https://usine.solution-libre.fr/docker/ansible-for-vscode/-/compare/0.1.1...0.2.0
 [0.1.1]: https://usine.solution-libre.fr/docker/ansible-for-vscode/-/compare/0.1.0...0.1.1

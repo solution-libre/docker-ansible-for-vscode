@@ -38,8 +38,8 @@ LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.f
 RUN dnf install -y bash-completion openssl \
     && dnf clean all
 
-RUN useradd -m vscode
-USER vscode
+RUN useradd -m -u 1000 vscode
+USER 1000
 # hadolint ignore=SC2016
 RUN curl -q https://salsa.debian.org/debian/bash/-/raw/debian/master/debian/skel.bashrc -o ~/.bashrc \
     && sed -i \
