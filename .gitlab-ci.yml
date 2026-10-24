@@ -16,7 +16,7 @@
 # along with Ansible Docker Image for VSCode.  If not, see <https://www.gnu.org/licenses/>.
 
 include:
-  - component: $CI_SERVER_FQDN/gitlab/components/lint/markdown@0.5.0
+  - component: $CI_SERVER_FQDN/gitlab/components/lint/markdown@0.5.1
     inputs:
       stage: linting
   - component: $CI_SERVER_FQDN/gitlab/components/changelog/parse@0.1.4
