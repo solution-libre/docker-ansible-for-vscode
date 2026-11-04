@@ -20,7 +20,7 @@ ARG ADT_VERSION=v26.10.1
 FROM ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}
 
 ARG ADT_VERSION
-ARG VERSION=0.2.1
+ARG VERSION=0.2.3
 
 LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.fr>' \
       org.opencontainers.image.base.name="ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}" \
@@ -35,8 +35,13 @@ LABEL org.opencontainers.image.authors='Solution Libre <contact@solution-libre.f
       org.opencontainers.image.version="${VERSION}"
 
 # hadolint ignore=DL3041
-RUN dnf install -y bash-completion openssl \
-    && dnf clean all
+RUN dnf install -y \
+        bash-completion \
+        bubblewrap \
+        openssl \
+        socat \
+    && \
+    dnf clean all
 
 RUN useradd -m -u 1000 vscode
 USER 1000
