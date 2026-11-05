@@ -74,7 +74,10 @@ docker test:
 
 container_scanning:
   variables:
+    AFTER_SCRIPT_IGNORE_ERRORS: false
     CS_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  after_script:
+    - trivy sbom --severity CRITICAL --exit-code 1 -o /dev/null -q gl-sbom-report.cdx.json
 
 release:
   stage: release
